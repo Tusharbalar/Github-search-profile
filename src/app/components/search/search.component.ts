@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { GithubSearchService } from 'src/app/services/github-search.service';
 
 @Component({
   selector: 'github-search',
@@ -11,8 +12,10 @@ export class SearchComponent implements OnInit, AfterViewChecked {
   @ViewChild("username", { static: true }) input: ElementRef;
 
   formGroup: FormGroup;
+  userInfo: any;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+              private githubSearchService: GithubSearchService) {
   }
 
   ngOnInit() {
@@ -32,7 +35,11 @@ export class SearchComponent implements OnInit, AfterViewChecked {
   }
 
   onSearch() {
-    console.log("form val", this.formGroup.value)
+    console.log("form val", this.formGroup.value);
+    this.githubSearchService.getUserInfo(this.formGroup.value.username).subscribe((res) => {
+      console.log('Res: ', res);
+      this.userInfo = res;
+    })
   }
 
 }

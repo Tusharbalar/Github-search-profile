@@ -1,1 +1,26 @@
-<p>search-result works!</p>
+<div class="panel panel-default">
+  <div class="panel-heading">{{user.name}}</div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-4">
+        <img class="img-circle" width="200" height="200" src="{{user.avatar_url}}">
+      </div>
+      <div class="col-md-8">
+        <div class="stats">
+          <span class="label label-primary">{{user.public_repos}} Public Repos</span>
+          <span class="label label-success">{{user.public_gists}} Public Gists</span>
+          <span class="label label-info">{{user.followers}} Followers</span>
+          <span class="label label-warning">{{user.following}} Following</span>
+        </div>
+        <br>
+        <ul class="list-group">
+          <li class="list-group-item"><strong>Username: </strong>{{user.login}}</li>
+          <li class="list-group-item"><strong>Location: </strong>{{user.location}}</li>
+          <li class="list-group-item"><strong>Email: </strong>{{user.email}}</li>
+          <li class="list-group-item"><strong>Blog: </strong>{{user.blog}}</li>
+          <li class="list-group-item"><strong>Member Since: </strong>{{user.created_at}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
