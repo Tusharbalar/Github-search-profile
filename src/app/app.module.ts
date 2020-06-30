@@ -9,6 +9,7 @@ import { SearchResultComponent } from './components/search-result/search-result.
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HeaderComponent } from './shared-components/header/header.component';
 import { FooterComponent } from './shared-components/footer/footer.component';
+import { SearchTextBoxComponent } from './components/search-text-box/search-text-box.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { FooterComponent } from './shared-components/footer/footer.component';
     SearchComponent,
     SearchResultComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    SearchTextBoxComponent
   ],
   imports: [
     BrowserModule,

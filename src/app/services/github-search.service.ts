@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, Subject } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 
 @Injectable({
@@ -10,10 +10,15 @@ import { catchError, retry } from 'rxjs/operators';
 export class GithubSearchService {
 
   baseURL = environment.baseURL;
+  public userInfo = new Subject<string>();
 
   constructor(private http: HttpClient) { }
 
   getUserInfo(username: string) {
     return this.http.get(`${this.baseURL}/users/${username}`);
+  }
+
+  setUserInfo(userInfo: any) {
+    this.userInfo.next(userInfo);
   }
 }

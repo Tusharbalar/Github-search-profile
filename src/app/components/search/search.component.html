@@ -1,11 +1,6 @@
 <div class="jumbotron">
   <h1>Github Search</h1>
-  <form [formGroup]="formGroup" (ngSubmit)="onSearch()" novalidate>
-    <div class="form-group">
-      <label>Github Username</label>
-      <input #username type="text" class="form-control" formControlName="username">
-    </div>
-    <button type="submit" class="btn btn-primary" (onClick)="onSearch()">Search</button>
-  </form>
+  <github-search-text-box [showClearOption]="true">
+  </github-search-text-box>
   <github-search-result *ngIf="userInfo" [user]="userInfo"></github-search-result>
 </div>

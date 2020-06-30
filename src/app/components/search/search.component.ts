@@ -1,45 +1,33 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { GithubSearchService } from 'src/app/services/github-search.service';
+import { Observable, throwError, Subject, pipe, Subscription } from 'rxjs';
 
 @Component({
   selector: 'github-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
-export class SearchComponent implements OnInit, AfterViewChecked {
+export class SearchComponent implements OnInit, OnDestroy {
 
-  @ViewChild("username", { static: true }) input: ElementRef;
+  userInfo = null;
+  subscription: Subscription;
 
-  formGroup: FormGroup;
-  userInfo: any;
+  constructor(private githubSerachService: GithubSearchService) {
+    
 
-  constructor(private fb: FormBuilder,
-              private githubSearchService: GithubSearchService) {
   }
 
   ngOnInit() {
-    this.initForm();
-  }
-
-  // Initialize the form
-  initForm() {
-    this.formGroup = this.fb.group({
-      username: ['', [Validators.required]]
-    });
-  }
-
-  // Focus in textbox
-  ngAfterViewChecked() {
-    this.input.nativeElement.focus();
-  }
-
-  onSearch() {
-    console.log("form val", this.formGroup.value);
-    this.githubSearchService.getUserInfo(this.formGroup.value.username).subscribe((res) => {
-      console.log('Res: ', res);
-      this.userInfo = res;
+    this.subscription = this.githubSerachService.userInfo.subscribe(userInfo => {
+      this.userInfo = userInfo;
     })
   }
 
+  setUserInfo(userInfo: any) {
+    this.userInfo = userInfo;
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 }
