@@ -21,4 +21,8 @@ export class GithubSearchService {
   setUserInfo(userInfo: any) {
     this.userInfo.next(userInfo);
   }
+
+  showNoUserFoundSection() {
+
+  }
 }

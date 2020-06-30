@@ -1,6 +1,7 @@
 import { Component, OnInit,ViewChild, ElementRef, AfterViewChecked, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { GithubSearchService } from 'src/app/services/github-search.service';
+import * as CONST from "../../constants";
 
 @Component({
   selector: 'github-search-text-box',
@@ -15,6 +16,8 @@ export class SearchTextBoxComponent implements OnInit, AfterViewChecked {
 
   formGroup: FormGroup;
   isAPIRunning: boolean = false;
+  showUserNotFoundSection: boolean = false;
+  oldValue: string = null;
 
   constructor(private fb: FormBuilder,
               private changeRef: ChangeDetectorRef,
@@ -39,20 +42,36 @@ export class SearchTextBoxComponent implements OnInit, AfterViewChecked {
 
   onSearch() {
     console.log("form val", this.formGroup.value);
-
-    if (!this.isAPIRunning && this.formGroup.valid) {
+    if (!this.isAPIRunning && this.formGroup.valid && this.oldValue != this.formGroup.value.username) {
       this.isAPIRunning = true;
+      this.oldValue = this.formGroup.value.username;
       this.githubSearchService.getUserInfo(this.formGroup.value.username).subscribe((res: any) => {
         this.isAPIRunning = false;
         console.log('Res: ', res);
         this.githubSearchService.setUserInfo(res);
         this.changeRef.detectChanges();
+      }, (err) => {
+        this.handleError(err);
       })
     }
   }
 
-  clearSearchResult() {
+  handleResponse() {
+
+  }
+
+  handleError(err: any) {
+    console.log(err)
+    this.isAPIRunning = false;
+    this.showUserNotFoundSection = true;
+    if (err.status == 404) {
+      this.githubSearchService.setUserInfo(CONST.USER_NOT_FOUND);
+    }
+  }
+
+  resetEverything() {
     this.formGroup.reset();
+    this.isAPIRunning = false;
     this.githubSearchService.setUserInfo(null);
   }
 
