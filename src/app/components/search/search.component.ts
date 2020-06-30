@@ -1,33 +1,39 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { GithubSearchService } from 'src/app/services/github-search.service';
-import { Observable, throwError, Subject, pipe, Subscription } from 'rxjs';
+import { isNull } from 'util';
 
 @Component({
   selector: 'github-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
-export class SearchComponent implements OnInit, OnDestroy {
+export class SearchComponent implements OnInit {
 
-  userInfo = null;
-  subscription: Subscription;
+  users: Array<any> = [];
+  selectedUser: any;
 
-  constructor(private githubSerachService: GithubSearchService) {
-    
+  constructor() {
 
   }
 
   ngOnInit() {
-    this.subscription = this.githubSerachService.userInfo.subscribe(userInfo => {
-      this.userInfo = userInfo;
-    })
+    
   }
 
-  setUserInfo(userInfo: any) {
-    this.userInfo = userInfo;
+  setUserInfo(e: any) {
+    console.log(e);
+    if (this.selectedUser && this.selectedUser.id) {
+      let result = this.users.find(obj => {
+        return obj.id == this.selectedUser.id;
+      });
+      if (!result) {
+        this.users.unshift(this.selectedUser);
+      }
+    }
+    
+    if (e == null) { // Reset user list data
+      this.users = [];
+    }
+    this.selectedUser = e;
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
 }

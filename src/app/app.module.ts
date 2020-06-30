@@ -10,6 +10,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HeaderComponent } from './shared-components/header/header.component';
 import { FooterComponent } from './shared-components/footer/footer.component';
 import { SearchTextBoxComponent } from './components/search-text-box/search-text-box.component';
+import { SearchedUserListComponent } from './components/searched-user-list/searched-user-list.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { SearchTextBoxComponent } from './components/search-text-box/search-text
     SearchResultComponent,
     HeaderComponent,
     FooterComponent,
-    SearchTextBoxComponent
+    SearchTextBoxComponent,
+    SearchedUserListComponent
   ],
   imports: [
     BrowserModule,

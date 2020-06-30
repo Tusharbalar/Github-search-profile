@@ -1,6 +1,18 @@
 <div class="jumbotron">
   <h1>Github Search</h1>
-  <github-search-text-box [showClearOption]="true">
-  </github-search-text-box>
-  <github-search-result *ngIf="userInfo" [user]="userInfo"></github-search-result>
+  <github-search-text-box 
+    [showClearOption]="true"
+    (userInfo)="setUserInfo($event)"
+  ></github-search-text-box>
+  <div class="row">
+    <div class="col-md-4">
+      <github-searched-user-list 
+        [users]="users"
+        (userSelected)="setUserInfo($event)">
+      </github-searched-user-list>
+    </div>
+    <div class="col-md-8">
+      <github-search-result [selectedUser]="selectedUser"></github-search-result>
+    </div>
+  </div>
 </div>

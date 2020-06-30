@@ -1,28 +1,44 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
 import * as CONST from "../../constants";
+import { GithubSearchService } from 'src/app/services/github-search.service';
 
 @Component({
   selector: 'github-search-result',
   templateUrl: './search-result.component.html',
   styleUrls: ['./search-result.component.scss']
 })
-export class SearchResultComponent implements OnInit {
+export class SearchResultComponent implements OnInit, OnChanges {
 
-  @Input() user: any;
+  @Input() selectedUser: any;
   userCreationDate: any;
-  isUserFound: boolean = true;
+  isUserNotFound: boolean = false;
+  userInfo = null;
 
-  constructor() { }
+  constructor(private githubSerachService: GithubSearchService) { }
 
   ngOnInit() {
-    console.log(this.user.created_at)
-    this.userCreationDate = new Date(this.user.created_at).toLocaleDateString();
-    this.checkIfUserFoundOrNot();
+       
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    for (let propName in changes) {
+      let change = changes[propName];
+      if (change && change.currentValue) {
+        this.selectedUser = change.currentValue;
+        this.userCreationDate = new Date(this.selectedUser.created_at).toLocaleDateString();
+        this.checkIfUserFoundOrNot(); 
+      }
+      console.log('aaaa', change);
+    }
+    // changes.prop contains the old and the new value...
   }
 
   checkIfUserFoundOrNot() {
-    if (this.user == CONST.USER_NOT_FOUND) {
-      this.isUserFound = false;
+    if (this.selectedUser.status == 404) {
+      this.selectedUser = null;
+      this.isUserNotFound = true;
+    } else {
+      this.isUserNotFound = false;
     }
   }
 

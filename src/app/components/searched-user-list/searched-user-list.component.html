@@ -1,0 +1,8 @@
+<div class="list-group">
+  <a href="javascript:void(0)"
+     class="list-group-item list-group-item-action"
+     *ngFor="let user of users"
+     (click)="selectUser(user)">
+    <img [src]="user.avatar_url" class="img-rounded" height="50" width="50" /> {{user.name}}
+  </a>
+</div>

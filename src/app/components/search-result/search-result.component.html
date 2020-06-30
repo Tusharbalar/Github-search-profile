@@ -1,30 +1,28 @@
 <div class="panel panel-default">
   <div class="panel-body">
-    <div class="row" *ngIf="isUserFound">
-      <div class="col-md-4">
-        <img class="img-circle" width="200" height="200" src="{{user.avatar_url}}">
+    <div class="row" *ngIf="selectedUser">
+      <div class="col align-self-end">
+        <img class="img-circle" width="200" height="200" src="{{selectedUser.avatar_url}}">
         <div>
-          <h3><b>{{user.name}}</b></h3>
+          <h3><b>{{selectedUser.name}}</b></h3>
         </div>
-      </div>
-      <div class="col-md-8">
         <div class="stats">
-          <span class="badge badge-primary">{{user.public_repos}} Public Repos</span>
-          <span class="badge badge-warning">{{user.public_gists}} Public Gists</span>
-          <span class="badge badge-success">{{user.followers}} Followers</span>
-          <span class="badge badge-info">{{user.following}} Following</span>
+          <span class="badge badge-primary">{{selectedUser.public_repos}} Public Repos</span>
+          <span class="badge badge-warning">{{selectedUser.public_gists}} Public Gists</span>
+          <span class="badge badge-success">{{selectedUser.followers}} Followers</span>
+          <span class="badge badge-info">{{selectedUser.following}} Following</span>
         </div>
         <br>
         <ul class="list-group">
-          <li class="list-group-item"><strong>Username: </strong>{{user.login}}</li>
-          <li class="list-group-item" [hidden]="!user.location"><strong>Location: </strong>{{user.location}}</li>
-          <li class="list-group-item" [hidden]="!user.email"><strong>Email: </strong>{{user.email}}</li>
-          <li class="list-group-item" [hidden]="!user.blog"><strong>Blog: </strong>{{user.blog}}</li>
+          <li class="list-group-item"><strong>Username: </strong>{{selectedUser.login}}</li>
+          <li class="list-group-item" [hidden]="!selectedUser.location"><strong>Location: </strong>{{selectedUser.location}}</li>
+          <li class="list-group-item" [hidden]="!selectedUser.email"><strong>Email: </strong>{{selectedUser.email}}</li>
+          <li class="list-group-item" [hidden]="!selectedUser.blog"><strong>Blog: </strong>{{selectedUser.blog}}</li>
           <li class="list-group-item"><strong>Member Since: </strong>{{userCreationDate}}</li>
         </ul>
       </div>
     </div>
-    <div class="row" *ngIf="!isUserFound">
+    <div class="row" *ngIf="isUserNotFound && !selectedUser">
       <div class="alert alert-danger" role="alert">
         No User Found!!
       </div>

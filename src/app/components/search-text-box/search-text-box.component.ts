@@ -37,42 +37,38 @@ export class SearchTextBoxComponent implements OnInit, AfterViewChecked {
 
   // Focus in textbox
   ngAfterViewChecked() {
-    // this.input.nativeElement.focus();
+    this.input.nativeElement.focus();
   }
 
   onSearch() {
-    console.log("form val", this.formGroup.value);
-    if (!this.isAPIRunning && this.formGroup.valid && this.oldValue != this.formGroup.value.username) {
+    const username = this.formGroup.value && this.formGroup.value.username;
+    if (!this.isAPIRunning && this.formGroup.valid && this.oldValue != username) {
       this.isAPIRunning = true;
-      this.oldValue = this.formGroup.value.username;
-      this.githubSearchService.getUserInfo(this.formGroup.value.username).subscribe((res: any) => {
-        this.isAPIRunning = false;
-        console.log('Res: ', res);
-        this.githubSearchService.setUserInfo(res);
-        this.changeRef.detectChanges();
+      this.oldValue = username;
+      this.githubSearchService.getUserInfo(username).subscribe((res: any) => {
+        this.handleResponse(res);
       }, (err) => {
         this.handleError(err);
-      })
+      });
     }
   }
 
-  handleResponse() {
-
+  handleResponse(userInfo: any) {
+    console.log('Res: ', userInfo);
+    this.isAPIRunning = false;
+    this.userInfo.emit(userInfo);
   }
 
   handleError(err: any) {
-    console.log(err)
     this.isAPIRunning = false;
     this.showUserNotFoundSection = true;
-    if (err.status == 404) {
-      this.githubSearchService.setUserInfo(CONST.USER_NOT_FOUND);
-    }
+    this.userInfo.emit(err);
   }
 
   resetEverything() {
     this.formGroup.reset();
     this.isAPIRunning = false;
-    this.githubSearchService.setUserInfo(null);
+    this.userInfo.emit(null);
   }
 
 }
