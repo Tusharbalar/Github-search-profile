@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'github-header',
@@ -26,13 +26,9 @@ import { Component, OnInit } from '@angular/core';
         </form>
       </div>
     </nav>
-  `
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HeaderComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
+export class HeaderComponent {
 
 }

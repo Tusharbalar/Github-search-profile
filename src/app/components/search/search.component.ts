@@ -19,18 +19,20 @@ export class SearchComponent implements OnInit, AfterViewChecked {
     this.initForm();
   }
 
+  // Initialize the form
   initForm() {
     this.formGroup = this.fb.group({
       username: ['', [Validators.required]]
     });
   }
 
+  // Focus in textbox
   ngAfterViewChecked() {
     this.input.nativeElement.focus();
   }
 
-  onSave() {
-
+  onSearch() {
+    console.log("form val", this.formGroup.value)
   }
 
 }
