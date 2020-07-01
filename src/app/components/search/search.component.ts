@@ -7,9 +7,9 @@ import { Component } from '@angular/core';
 })
 export class SearchComponent {
 
-  private users: Array<any> = [];
-  private repos: Array<any> = [];
-  private selectedUser: any;
+  users: Array<any> = [];
+  repos: Array<any> = [];
+  selectedUser: any;
 
   setUserInfo(e: any) {
     if (e) {
