@@ -6,7 +6,7 @@
      class="list-group-item list-group-item-action"
      *ngFor="let user of users"
      (click)="selectUser(user)">
-    <img [src]="user.avatar_url" class="img-rounded" height="50" width="50" /> {{user.name}}
+    <img [src]="user.userInfo.avatar_url" class="img-rounded" height="50" width="50" /> {{user.userInfo.name}}
   </a>
 </div>
 

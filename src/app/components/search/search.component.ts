@@ -21,15 +21,16 @@ export class SearchComponent implements OnInit {
   }
 
   setUserInfo(e: any) {
+
     if (this.selectedUser && this.selectedUser.id) {
       let result = this.users.find(obj => {
-        return obj.id == this.selectedUser.id;
+        return obj.userInfo.id == this.selectedUser.id;
       });
       if (!result) {
-        this.users.unshift(this.selectedUser);
+        this.users.unshift({ userInfo: this.selectedUser, topFiveRepos: this.repos });
       }
     }
-    
+    console.log("users", this.users)
     if (e == null) { // Reset user list data
       this.users = [];
     }

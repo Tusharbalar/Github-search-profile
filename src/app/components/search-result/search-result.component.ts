@@ -24,6 +24,7 @@ export class SearchResultComponent implements OnInit, OnChanges {
     for (let propName in changes) {
       let change = changes[propName];
       if (change && change.currentValue) {
+        console.log(change)
         this.selectedUser = change.currentValue;
         this.userCreationDate = new Date(this.selectedUser.created_at).toLocaleDateString();
         this.checkIfUserFoundOrNot(); 
