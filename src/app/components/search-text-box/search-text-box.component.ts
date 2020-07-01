@@ -2,6 +2,7 @@ import { Component, OnInit,ViewChild, ElementRef, AfterViewChecked, Input, Outpu
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { GithubSearchService } from 'src/app/services/github-search.service';
 import * as CONST from "../../constants";
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'github-search-text-box',
@@ -45,7 +46,9 @@ export class SearchTextBoxComponent implements OnInit, AfterViewChecked {
     if (!this.isAPIRunning && this.formGroup.valid && this.oldValue != username) {
       this.isAPIRunning = true;
       this.oldValue = username;
-      this.githubSearchService.getUserInfo(username).subscribe((res: any) => {
+      forkJoin([this.githubSearchService.getUserInfo(username),
+                this.githubSearchService.getUserRepos(username)]).subscribe(res => {
+        console.log("join res", res);
         this.handleResponse(res);
       }, (err) => {
         this.handleError(err);
@@ -56,13 +59,17 @@ export class SearchTextBoxComponent implements OnInit, AfterViewChecked {
   handleResponse(userInfo: any) {
     console.log('Res: ', userInfo);
     this.isAPIRunning = false;
-    this.userInfo.emit(userInfo);
+    let topFiveRepos = userInfo[1].sort((a, b) => {
+      return b.stargazers_count-a.stargazers_count
+    }).slice(0, 6);
+    console.log(topFiveRepos);
+    this.userInfo.emit({userInfo: userInfo[0], topFiveRepos: topFiveRepos});
   }
 
   handleError(err: any) {
     this.isAPIRunning = false;
     this.showUserNotFoundSection = true;
-    this.userInfo.emit(err);
+    this.userInfo.emit({error: err});
   }
 
   resetEverything() {

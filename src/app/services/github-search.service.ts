@@ -18,6 +18,10 @@ export class GithubSearchService {
     return this.http.get(`${this.baseURL}/users/${username}`);
   }
 
+  getUserRepos(username: string) {
+    return this.http.get(`${this.baseURL}/users/${username}/repos`);
+  }
+
   setUserInfo(userInfo: any) {
     this.userInfo.next(userInfo);
   }

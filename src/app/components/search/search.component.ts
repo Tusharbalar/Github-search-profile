@@ -9,6 +9,7 @@ import { isNull } from 'util';
 export class SearchComponent implements OnInit {
 
   users: Array<any> = [];
+  repos: Array<any> = [];
   selectedUser: any;
 
   constructor() {
@@ -20,7 +21,6 @@ export class SearchComponent implements OnInit {
   }
 
   setUserInfo(e: any) {
-    console.log(e);
     if (this.selectedUser && this.selectedUser.id) {
       let result = this.users.find(obj => {
         return obj.id == this.selectedUser.id;
@@ -33,7 +33,8 @@ export class SearchComponent implements OnInit {
     if (e == null) { // Reset user list data
       this.users = [];
     }
-    this.selectedUser = e;
+    this.selectedUser = e && (e.userInfo || e.error);
+    this.repos = e.topFiveRepos;
   }
 
 }

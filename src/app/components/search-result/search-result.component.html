@@ -1,19 +1,28 @@
 <div class="panel panel-default">
   <div class="panel-body">
     <div class="row" *ngIf="selectedUser">
-      <div class="col align-self-end">
-        <img class="img-circle" width="200" height="200" src="{{selectedUser.avatar_url}}">
+      <div class="col-md-5 text-center">
+        <img class="rounded-circle" width="150" height="150" src="{{selectedUser.avatar_url}}">
         <div>
-          <h3><b>{{selectedUser.name}}</b></h3>
+          <h3 class="text-center mt-3"><b>{{selectedUser.name}}</b></h3>
         </div>
-        <div class="stats">
-          <span class="badge badge-primary">{{selectedUser.public_repos}} Public Repos</span>
-          <span class="badge badge-warning">{{selectedUser.public_gists}} Public Gists</span>
-          <span class="badge badge-success">{{selectedUser.followers}} Followers</span>
-          <span class="badge badge-info">{{selectedUser.following}} Following</span>
+      </div>
+      <div class="col-md-7">
+        <div class="row">
+          <div class="col-sm-6">
+            <span class="badge w-100 badge-primary">{{selectedUser.public_repos}} Public Repos</span>
+          </div>
+          <div class="col-sm-6">
+            <span class="badge w-100 badge-warning">{{selectedUser.public_gists}} Public Gists</span>
+          </div>
+          <div class="col-sm-6">
+            <span class="badge w-100 badge-success">{{selectedUser.followers}} Followers</span>
+          </div>
+          <div class="col-sm-6">
+            <span class="badge w-100 badge-info">{{selectedUser.following}} Following</span>
+          </div>
         </div>
-        <br>
-        <ul class="list-group">
+        <ul class="list-group mt-3 user_info">
           <li class="list-group-item"><strong>Username: </strong>{{selectedUser.login}}</li>
           <li class="list-group-item" [hidden]="!selectedUser.location"><strong>Location: </strong>{{selectedUser.location}}</li>
           <li class="list-group-item" [hidden]="!selectedUser.email"><strong>Email: </strong>{{selectedUser.email}}</li>
@@ -22,7 +31,7 @@
         </ul>
       </div>
     </div>
-    <div class="row" *ngIf="isUserNotFound && !selectedUser">
+    <div class="no_user_error" *ngIf="!noUserFound && !selectedUser">
       <div class="alert alert-danger" role="alert">
         No User Found!!
       </div>

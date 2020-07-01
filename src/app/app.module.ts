@@ -11,6 +11,7 @@ import { HeaderComponent } from './shared-components/header/header.component';
 import { FooterComponent } from './shared-components/footer/footer.component';
 import { SearchTextBoxComponent } from './components/search-text-box/search-text-box.component';
 import { SearchedUserListComponent } from './components/searched-user-list/searched-user-list.component';
+import { FiveStarReposComponent } from './components/five-star-repos/five-star-repos.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { SearchedUserListComponent } from './components/searched-user-list/searc
     HeaderComponent,
     FooterComponent,
     SearchTextBoxComponent,
-    SearchedUserListComponent
+    SearchedUserListComponent,
+    FiveStarReposComponent
   ],
   imports: [
     BrowserModule,

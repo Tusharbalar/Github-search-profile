@@ -16,7 +16,7 @@ export class SearchedUserListComponent implements OnInit {
   }
 
   selectUser(user) {
-    this.userSelected.emit(user);
+    this.userSelected.emit({ userInfo: user });
   }
 
 }

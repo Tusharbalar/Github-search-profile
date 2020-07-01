@@ -1,7 +1,46 @@
-body {
-  min-height: 75rem;
-  padding-top: 4.5rem;
+html, body {
+  height: 100%;
 }
+body {
+  padding-top: 62px;
+
+  @media (max-width: 1199px) {
+    font-size: 16px !important;
+  }
+  
+  .jumbotron {
+    padding: 20px;
+    margin-bottom: 0;
+    min-height: 500px;
+
+    h1 {
+      border-bottom: 1px solid #d3d3d3;
+      padding-bottom: 20px;
+      margin-bottom: 40px;
+
+      @media (max-width: 1199px) {
+        font-size: 36px;
+      }
+    }
+
+    h3 {
+      @media (max-width: 1199px) {
+        font-size: 24px;
+      }
+    }
+  }
+
+  main {
+    // height: 100%;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
+  }
+}
+
+
 
 .bd-placeholder-img {
   font-size: 1.125rem;
@@ -17,3 +56,4 @@ body {
     font-size: 3.5rem;
   }
 }
+

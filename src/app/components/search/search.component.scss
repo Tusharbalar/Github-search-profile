@@ -1,0 +1,11 @@
+.mb-xs-5 {
+  margin-bottom: 3rem!important;
+}
+@media (max-width: 767px) {
+  .text-sm-center {
+    text-align: center;
+  }
+  .border-sm-none {
+    border: none !important;
+  }
+}

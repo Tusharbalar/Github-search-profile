@@ -11,7 +11,7 @@ export class SearchResultComponent implements OnInit, OnChanges {
 
   @Input() selectedUser: any;
   userCreationDate: any;
-  isUserNotFound: boolean = false;
+  noUserFound: boolean = false;
   userInfo = null;
 
   constructor(private githubSerachService: GithubSearchService) { }
@@ -28,17 +28,16 @@ export class SearchResultComponent implements OnInit, OnChanges {
         this.userCreationDate = new Date(this.selectedUser.created_at).toLocaleDateString();
         this.checkIfUserFoundOrNot(); 
       }
-      console.log('aaaa', change);
     }
-    // changes.prop contains the old and the new value...
   }
 
   checkIfUserFoundOrNot() {
+    console.log(this.selectedUser)
     if (this.selectedUser.status == 404) {
-      this.selectedUser = null;
-      this.isUserNotFound = true;
+      this.selectedUser = false;
+      this.noUserFound = true;
     } else {
-      this.isUserNotFound = false;
+      this.noUserFound = false;
     }
   }
 

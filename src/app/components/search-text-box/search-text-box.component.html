@@ -1,8 +1,11 @@
 <form [formGroup]="formGroup" (ngSubmit)="onSearch()" novalidate>
-  <button *ngIf="showClearOption" type="button" class="btn btn-link" (click)="resetEverything()">Clear Search</button>
-  <input #username class="form-control mr-sm-2" type="text" placeholder="Search by username" formControlName="username">
-  <button [disabled]="isAPIRunning" class="btn btn-primary my-2 my-sm-0" type="submit" (onClick)="onSearch()">
-    <span *ngIf="!isAPIRunning">Search</span>
-    <span *ngIf="isAPIRunning">Searching..</span>
-  </button>
+  <button *ngIf="showClearOption" type="button" class="btn btn-link d-block pl-0 ml-auto clear_btn" (click)="resetEverything()">Clear Search</button>
+  <div class="search-wrapper">
+    <input #username class="form-control rounded-0 mr-sm-2" type="text" placeholder="Search by username" formControlName="username">
+    <button [disabled]="isAPIRunning" class="btn btn-primary my-2 my-sm-0" type="submit" (onClick)="onSearch()">
+      <span *ngIf="!isAPIRunning">Search</span>
+      <span *ngIf="isAPIRunning">Searching..</span>
+    </button>
+  </div>
+  
 </form>

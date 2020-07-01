@@ -1,4 +1,7 @@
-<div class="list-group">
+<div class="list-group list-style" *ngIf="users.length;else showEmptyMessage">
+  <span class="list-group-item list-group-item-action active">
+    User List
+  </span>
   <a href="javascript:void(0)"
      class="list-group-item list-group-item-action"
      *ngFor="let user of users"
@@ -6,3 +9,7 @@
     <img [src]="user.avatar_url" class="img-rounded" height="50" width="50" /> {{user.name}}
   </a>
 </div>
+
+<ng-template #showEmptyMessage>
+  Do not have history.
+</ng-template>
