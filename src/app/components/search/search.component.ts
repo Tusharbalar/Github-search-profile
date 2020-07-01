@@ -16,6 +16,7 @@ export class SearchComponent {
       this.updateUsersInfo();
       this.selectedUser = e.userInfo || e.error;
       this.repos = e.topFiveRepos;
+      console.log(this.repos)
     } else {
       this.resetAll();
     }

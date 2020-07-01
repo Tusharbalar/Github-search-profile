@@ -5,7 +5,7 @@ import { Component, Input } from '@angular/core';
   template: `
     <ul>
       <li *ngFor="let repo of repos">
-        <a href="#">
+        <a [href]="repo.clone_url" target="_blank">
           {{repo.name}}
         </a> 
         <span class="dots"></span> {{repo.stargazers_count}} starts
