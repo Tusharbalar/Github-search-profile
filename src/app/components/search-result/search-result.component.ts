@@ -13,6 +13,7 @@ export class SearchResultComponent implements OnInit, OnChanges {
   userCreationDate: any;
   noUserFound: boolean = false;
   userInfo = null;
+  error = false;
 
   constructor(private githubSerachService: GithubSearchService) { }
 
@@ -37,7 +38,13 @@ export class SearchResultComponent implements OnInit, OnChanges {
     if (this.selectedUser.status == 404) {
       this.selectedUser = false;
       this.noUserFound = true;
+      this.error = false;
+    } else if (this.selectedUser.status == 403) {
+      this.selectedUser = false;
+      this.noUserFound = true;
+      this.error = true;
     } else {
+      this.error = false;
       this.noUserFound = false;
     }
   }
