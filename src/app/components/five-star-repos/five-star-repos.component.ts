@@ -1,17 +1,22 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'github-five-star-repos',
-  templateUrl: './five-star-repos.component.html',
+  template: `
+    <ul>
+      <li *ngFor="let repo of repos">
+        <a href="#">
+          {{repo.name}}
+        </a> 
+        <span class="dots"></span> {{repo.stargazers_count}} starts
+      </li>
+    </ul>
+  `,
   styleUrls: ['./five-star-repos.component.scss']
 })
-export class FiveStarReposComponent implements OnInit {
+export class FiveStarReposComponent {
 
   @Input() repos: Array<any> = [];
-  
-  constructor() { }
 
-  ngOnInit() {
-  }
 
 }

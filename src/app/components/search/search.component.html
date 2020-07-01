@@ -5,13 +5,21 @@
     </div>
     <hr>
     <div class="col-md-4 mb-xs-5 mb-0">
-      <github-searched-user-list [users]="users" (userSelected)="setUserInfo($event)">
+      <github-searched-user-list 
+        [users]="users" 
+        (userSelected)="setUserInfo($event)">
       </github-searched-user-list>
     </div>
     <div class="col-md-8 border-left border-secondary border-sm-none">
-      <github-search-text-box [showClearOption]="true" (userInfo)="setUserInfo($event)"></github-search-text-box>
-      <github-search-result [selectedUser]="selectedUser"></github-search-result>
-      <github-five-star-repos [repos]="repos"></github-five-star-repos>
+      <github-search-text-box 
+        (userInfo)="setUserInfo($event)">
+      </github-search-text-box>
+      <github-search-result 
+        [selectedUser]="selectedUser">
+      </github-search-result>
+      <github-five-star-repos 
+        [repos]="repos">
+      </github-five-star-repos>
     </div>
   </div>
 </div>
